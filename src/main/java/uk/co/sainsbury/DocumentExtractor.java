@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class DocumentExtractor {
 
     public Elements getProductElements(Document document) {
-        return null;
+        return new Elements(new Element("dummy"));
     }
 
     public String getTitle(Element element) {

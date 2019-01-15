@@ -7,7 +7,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        HtmlParser parser = url -> null;
+        JsoupApi jsoupApi = new JsoupApi();
+        DocumentExtractor documentExtractor = new DocumentExtractor();
+        HtmlParser parser = new JsoupHtmlParser(jsoupApi, documentExtractor);
         ScrapingService scrapingService = new ScrapingService(parser);
         ScraperUseCase useCase = new ScraperUseCase(scrapingService);
         System.out.println(useCase.scrape(URL));
