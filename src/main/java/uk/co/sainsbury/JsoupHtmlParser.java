@@ -28,8 +28,8 @@ public class JsoupHtmlParser implements HtmlParser {
             String title = documentExtractor.getTitle(element);
             BigDecimal unitPrice = documentExtractor.getPrice(element);
             Elements productInformation = documentExtractor.getProductInformation(element);
-            String description = documentExtractor.getDescription(element);
-            Integer energy = documentExtractor.getEnergy(element);
+            String description = documentExtractor.getDescription(productInformation);
+            Integer energy = documentExtractor.getEnergy(productInformation);
 
             products.add(new Product(title, energy, unitPrice, description));
         }

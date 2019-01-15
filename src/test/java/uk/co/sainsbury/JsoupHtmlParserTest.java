@@ -68,31 +68,37 @@ public class JsoupHtmlParserTest {
     @Test
     public void parse_shouldUseDocumentExtractorToExtractTheEnergyValueOfProduct() {
         Document document = new Document(URL);
-        when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         Element element = new Element("element");
         Elements elements = new Elements(element);
+        Elements productInformation = new Elements(new Element("product"), new Element("information"));
 
+        when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
-        when(documentExtractor.getEnergy(any(Element.class))).thenReturn(45);
+        when(documentExtractor.getProductInformation(any(Element.class))).thenReturn(productInformation);
+        when(documentExtractor.getEnergy(any(Elements.class))).thenReturn(45);
 
         assertThat(parser.parse(URL).get(0).getEnergy()).isEqualTo(45);
         verify(jsoupApi).getWebPageAsDocument(URL);
-        verify(documentExtractor).getEnergy(element);
+        verify(documentExtractor).getProductInformation(element);
+        verify(documentExtractor).getEnergy(productInformation);
     }
 
     @Test
     public void parse_shouldUseDocumentExtractorToExtractTheDescriptionOfProduct() {
         Document document = new Document(URL);
-        when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         Element element = new Element("element");
         Elements elements = new Elements(element);
+        Elements productInformation = new Elements(new Element("product"), new Element("information"));
 
+        when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
-        when(documentExtractor.getDescription(any(Element.class))).thenReturn("Really tasty");
+        when(documentExtractor.getProductInformation(any(Element.class))).thenReturn(productInformation);
+        when(documentExtractor.getDescription(any(Elements.class))).thenReturn("Really tasty");
 
         assertThat(parser.parse(URL).get(0).getDescription()).isEqualTo("Really tasty");
         verify(jsoupApi).getWebPageAsDocument(URL);
-        verify(documentExtractor).getDescription(element);
+        verify(documentExtractor).getProductInformation(element);
+        verify(documentExtractor).getDescription(productInformation);
     }
 
     @Test
@@ -118,11 +124,13 @@ public class JsoupHtmlParserTest {
         Element element = new Element("element");
         Element anotherElement = new Element("element");
         Elements elements = new Elements(element, anotherElement);
+        Elements productInformation = new Elements(new Element("product"), new Element("information"));
 
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getTitle(any(Element.class))).thenReturn("Mangoes", "Apples");
-        when(documentExtractor.getEnergy(any(Element.class))).thenReturn(185, 105);
-        when(documentExtractor.getDescription(any(Element.class))).thenReturn("Refreshing", "Crisp");
+        when(documentExtractor.getEnergy(any(Elements.class))).thenReturn(185, 105);
+        when(documentExtractor.getProductInformation(any(Element.class))).thenReturn(productInformation);
+        when(documentExtractor.getDescription(any(Elements.class))).thenReturn("Refreshing", "Crisp");
         when(documentExtractor.getPrice(any(Element.class))).thenReturn(new BigDecimal("1.20"), new BigDecimal("65"));
 
         List<Product> products = parser.parse(URL);
@@ -130,6 +138,4 @@ public class JsoupHtmlParserTest {
         assertThat(products.get(0)).isEqualTo(new Product("Mangoes", 185, new BigDecimal("1.20"), "Refreshing"));
         assertThat(products.get(1)).isEqualTo(new Product("Apples", 105, new BigDecimal("65"), "Crisp")       );
     }
-
-
 }
