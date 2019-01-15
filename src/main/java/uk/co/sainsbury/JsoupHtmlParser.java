@@ -17,7 +17,7 @@ public class JsoupHtmlParser implements HtmlParser {
     }
 
     @Override
-    public Object parse(String url) {
+    public Product parse(String url) {
         Document document = jsoupApi.getWebPageAsDocument(url);
         Element element = documentExtractor.getProductElements(document).get(0);
 
@@ -28,6 +28,6 @@ public class JsoupHtmlParser implements HtmlParser {
         Integer energy = documentExtractor.getEnergy(element);
 
 
-        return document;
+        return new Product(title, energy, unitPrice, description);
     }
 }

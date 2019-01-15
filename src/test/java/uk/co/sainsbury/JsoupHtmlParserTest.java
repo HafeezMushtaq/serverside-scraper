@@ -11,6 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -56,8 +57,7 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getTitle(any(Element.class))).thenReturn("Cherries");
 
-        parser.parse(URL);
-
+        assertThat(parser.parse(URL).getTitle()).isEqualTo("Cherries");
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getTitle(element);
     }
@@ -72,8 +72,7 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getEnergy(any(Element.class))).thenReturn(45);
 
-        parser.parse(URL);
-
+        assertThat(parser.parse(URL).getEnergy()).isEqualTo(45);
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getEnergy(element);
     }
@@ -88,8 +87,7 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getDescription(any(Element.class))).thenReturn("Really tasty");
 
-        parser.parse(URL);
-
+        assertThat(parser.parse(URL).getDescription()).isEqualTo("Really tasty");
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getDescription(element);
     }
@@ -104,9 +102,12 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getPrice(any(Element.class))).thenReturn(BigDecimal.ONE);
 
-        parser.parse(URL);
+        assertThat(parser.parse(URL).getPrice()).isEqualTo(BigDecimal.ONE);
 
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getPrice(element);
     }
+
+
+
 }
