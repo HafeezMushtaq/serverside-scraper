@@ -1,9 +1,10 @@
 package uk.co.sainsbury;
 
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.math.BigDecimal;
 
 public class JsoupHtmlParser implements HtmlParser {
 
@@ -18,7 +19,14 @@ public class JsoupHtmlParser implements HtmlParser {
     @Override
     public Object parse(String url) {
         Document document = jsoupApi.getWebPageAsDocument(url);
-        Elements productElements = documentExtractor.getProductElements(document);
+        Element element = documentExtractor.getProductElements(document).get(0);
+
+        String title = documentExtractor.getTitle(element);
+        BigDecimal unitPrice = documentExtractor.getPrice(element);
+        Elements productInformation = documentExtractor.getProductInformation(element);
+        String description = documentExtractor.getDescription(element);
+        Integer energy = documentExtractor.getEnergy(element);
+
 
         return document;
     }
