@@ -7,7 +7,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ScrapingService scrapingService = new ScrapingService();
+        HtmlParser parser = url -> null;
+        ScrapingService scrapingService = new ScrapingService(parser);
         ScraperUseCase useCase = new ScraperUseCase(scrapingService);
         System.out.println(useCase.scrape(URL));
     }
