@@ -5,6 +5,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsoupHtmlParser implements HtmlParser {
 
@@ -17,17 +19,20 @@ public class JsoupHtmlParser implements HtmlParser {
     }
 
     @Override
-    public Product parse(String url) {
+    public List<Product> parse(String url) {
         Document document = jsoupApi.getWebPageAsDocument(url);
-        Element element = documentExtractor.getProductElements(document).get(0);
+        Elements productElements = documentExtractor.getProductElements(document);
+        List<Product> products = new ArrayList<>();
 
-        String title = documentExtractor.getTitle(element);
-        BigDecimal unitPrice = documentExtractor.getPrice(element);
-        Elements productInformation = documentExtractor.getProductInformation(element);
-        String description = documentExtractor.getDescription(element);
-        Integer energy = documentExtractor.getEnergy(element);
+        for (Element element : productElements) {
+            String title = documentExtractor.getTitle(element);
+            BigDecimal unitPrice = documentExtractor.getPrice(element);
+            Elements productInformation = documentExtractor.getProductInformation(element);
+            String description = documentExtractor.getDescription(element);
+            Integer energy = documentExtractor.getEnergy(element);
 
-
-        return new Product(title, energy, unitPrice, description);
+            products.add(new Product(title, energy, unitPrice, description));
+        }
+        return products;
     }
 }

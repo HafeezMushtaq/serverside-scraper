@@ -1,5 +1,6 @@
 package uk.co.sainsbury;
 
+import org.assertj.core.api.Assertions;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -10,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
@@ -57,7 +60,7 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getTitle(any(Element.class))).thenReturn("Cherries");
 
-        assertThat(parser.parse(URL).getTitle()).isEqualTo("Cherries");
+        assertThat(parser.parse(URL).get(0).getTitle()).isEqualTo("Cherries");
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getTitle(element);
     }
@@ -72,7 +75,7 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getEnergy(any(Element.class))).thenReturn(45);
 
-        assertThat(parser.parse(URL).getEnergy()).isEqualTo(45);
+        assertThat(parser.parse(URL).get(0).getEnergy()).isEqualTo(45);
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getEnergy(element);
     }
@@ -87,7 +90,7 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getDescription(any(Element.class))).thenReturn("Really tasty");
 
-        assertThat(parser.parse(URL).getDescription()).isEqualTo("Really tasty");
+        assertThat(parser.parse(URL).get(0).getDescription()).isEqualTo("Really tasty");
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getDescription(element);
     }
@@ -102,12 +105,31 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getPrice(any(Element.class))).thenReturn(BigDecimal.ONE);
 
-        assertThat(parser.parse(URL).getPrice()).isEqualTo(BigDecimal.ONE);
+        assertThat(parser.parse(URL).get(0).getPrice()).isEqualTo(BigDecimal.ONE);
 
         verify(jsoupApi).getWebPageAsDocument(URL);
         verify(documentExtractor).getPrice(element);
     }
 
+    @Test
+    public void parse_ReturnListOfProductsWhenWeHaveMoreThanProductElement() {
+        Document document = new Document(URL);
+        when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
+        Element element = new Element("element");
+        Element anotherElement = new Element("element");
+        Elements elements = new Elements(element, anotherElement);
+
+        when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
+        when(documentExtractor.getTitle(any(Element.class))).thenReturn("Mangoes", "Apples");
+        when(documentExtractor.getEnergy(any(Element.class))).thenReturn(185, 105);
+        when(documentExtractor.getDescription(any(Element.class))).thenReturn("Refreshing", "Crisp");
+        when(documentExtractor.getPrice(any(Element.class))).thenReturn(new BigDecimal("1.20"), new BigDecimal("65"));
+
+        List<Product> products = parser.parse(URL);
+
+        assertThat(products.get(0)).isEqualTo(new Product("Mangoes", 185, new BigDecimal("1.20"), "Refreshing"));
+        assertThat(products.get(1)).isEqualTo(new Product("Apples", 105, new BigDecimal("65"), "Crisp")       );
+    }
 
 
 }

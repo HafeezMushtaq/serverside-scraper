@@ -1,6 +1,8 @@
 package uk.co.sainsbury;
 
+import java.util.List;
+
 public interface HtmlParser {
 
-    Product parse(String url);
+    List<Product> parse(String url);
 }
