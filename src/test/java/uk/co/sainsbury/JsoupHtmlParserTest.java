@@ -74,12 +74,12 @@ public class JsoupHtmlParserTest {
 
         when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
-        when(documentExtractor.getProductInformation(any(Element.class))).thenReturn(productInformation);
+        when(documentExtractor.getProductInformation(any(Document.class))).thenReturn(productInformation);
         when(documentExtractor.getEnergy(any(Elements.class))).thenReturn(45);
 
         assertThat(parser.parse(URL).get(0).getEnergy()).isEqualTo(45);
         verify(jsoupApi).getWebPageAsDocument(URL);
-        verify(documentExtractor).getProductInformation(element);
+        verify(documentExtractor).getProductInformation(document);
         verify(documentExtractor).getEnergy(productInformation);
     }
 
@@ -92,12 +92,12 @@ public class JsoupHtmlParserTest {
 
         when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
-        when(documentExtractor.getProductInformation(any(Element.class))).thenReturn(productInformation);
+        when(documentExtractor.getProductInformation(any(Document.class))).thenReturn(productInformation);
         when(documentExtractor.getDescription(any(Elements.class))).thenReturn("Really tasty");
 
         assertThat(parser.parse(URL).get(0).getDescription()).isEqualTo("Really tasty");
         verify(jsoupApi).getWebPageAsDocument(URL);
-        verify(documentExtractor).getProductInformation(element);
+        verify(documentExtractor).getProductInformation(document);
         verify(documentExtractor).getDescription(productInformation);
     }
 
@@ -129,7 +129,7 @@ public class JsoupHtmlParserTest {
         when(documentExtractor.getProductElements(any(Document.class))).thenReturn(elements);
         when(documentExtractor.getTitle(any(Element.class))).thenReturn("Mangoes", "Apples");
         when(documentExtractor.getEnergy(any(Elements.class))).thenReturn(185, 105);
-        when(documentExtractor.getProductInformation(any(Element.class))).thenReturn(productInformation);
+        when(documentExtractor.getProductInformation(any(Document.class))).thenReturn(productInformation);
         when(documentExtractor.getDescription(any(Elements.class))).thenReturn("Refreshing", "Crisp");
         when(documentExtractor.getPrice(any(Element.class))).thenReturn(new BigDecimal("1.20"), new BigDecimal("65"));
 

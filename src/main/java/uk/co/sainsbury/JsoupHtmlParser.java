@@ -27,7 +27,10 @@ public class JsoupHtmlParser implements HtmlParser {
         for (Element element : productElements) {
             String title = documentExtractor.getTitle(element);
             BigDecimal unitPrice = documentExtractor.getPrice(element);
-            Elements productInformation = documentExtractor.getProductInformation(element);
+
+            String productInformationUrl = documentExtractor.getProductInformationUrl(element);
+            Document productInfo = jsoupApi.getWebPageAsDocument(productInformationUrl);
+            Elements productInformation = documentExtractor.getProductInformation(productInfo);
             String description = documentExtractor.getDescription(productInformation);
             Integer energy = documentExtractor.getEnergy(productInformation);
 

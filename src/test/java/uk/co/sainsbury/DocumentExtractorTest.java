@@ -58,6 +58,28 @@ public class DocumentExtractorTest {
     }
 
     @Test
+    public void getProductInformationUrl_shouldUseSelectFirstWithCssQueryToExtractProductInfoUrl() {
+        Element element = mock(Element.class);
+        Element productInfoUrl = mock(Element.class);
+        when(element.selectFirst(anyString())).thenReturn(productInfoUrl);
+        when(productInfoUrl.attr(anyString())).thenReturn("www.product-info/url");
+
+        assertThat(extractor.getProductInformationUrl(element)).isEqualTo("www.product-info/url");
+        verify(element).selectFirst("a");
+    }
+
+    @Test
+    public void getProductInformation_shouldUseSelectFirstWithCssQueryToExtractProductInfoUrl() {
+        Document prodInfoDoc = mock(Document.class);
+        Elements prodInfo = mock(Elements.class);
+        when(prodInfoDoc.select(anyString())).thenReturn(prodInfo);
+        when(prodInfo.attr(anyString())).thenReturn("www.product-info/url");
+
+        assertThat(extractor.getProductInformation(prodInfoDoc)).isEqualTo(prodInfo);
+        verify(prodInfoDoc).select("#information .productText");
+    }
+
+    @Test
     public void getDescription_ShouldUseSelectFirstWithCssQueryToExtractDescriptionFromOfProductInfo() {
         Elements productInfo = mock(Elements.class);
         Element description = mock(Element.class);

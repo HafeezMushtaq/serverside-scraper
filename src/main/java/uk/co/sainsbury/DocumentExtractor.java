@@ -1,6 +1,7 @@
 package uk.co.sainsbury;
 
 
+import com.sun.webkit.WebPage;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,8 +26,12 @@ public class DocumentExtractor {
         return new BigDecimal(cleanedPrice);
     }
 
-    public Elements getProductInformation(Element element) {
-        return null;
+    public String getProductInformationUrl(Element element) {
+        return element.selectFirst("a").attr("abs:href");
+    }
+
+    public Elements getProductInformation(Document productInfo) {
+        return productInfo.select("#information .productText");
     }
 
     public String getDescription(Elements productInfo) {
