@@ -1,4 +1,4 @@
-package uk.co.sainsbury;
+package uk.co.sainsbury.api;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

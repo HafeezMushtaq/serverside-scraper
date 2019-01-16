@@ -1,6 +1,10 @@
 package uk.co.sainsbury;
 
 
+import uk.co.sainsbury.api.JsoupApi;
+import uk.co.sainsbury.service.*;
+import uk.co.sainsbury.usecase.ScraperUseCase;
+
 public class Main {
 
     private static final String URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/webapp/wcs/stores/servlet/gb/groceries/berries-cherries-currants6039.html";

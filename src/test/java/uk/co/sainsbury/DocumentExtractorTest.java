@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.junit.Test;
+import uk.co.sainsbury.service.DocumentExtractor;
 
 import java.math.BigDecimal;
 

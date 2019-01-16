@@ -1,4 +1,6 @@
-package uk.co.sainsbury;
+package uk.co.sainsbury.usecase;
+
+import uk.co.sainsbury.service.ScrapingService;
 
 public class ScraperUseCase {
 

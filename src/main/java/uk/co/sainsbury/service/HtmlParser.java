@@ -1,4 +1,4 @@
-package uk.co.sainsbury;
+package uk.co.sainsbury.service;
 
 import java.util.List;
 

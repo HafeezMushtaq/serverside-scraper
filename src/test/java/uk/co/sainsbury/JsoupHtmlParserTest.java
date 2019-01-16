@@ -1,6 +1,5 @@
 package uk.co.sainsbury;
 
-import org.assertj.core.api.Assertions;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -9,9 +8,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import uk.co.sainsbury.service.DocumentExtractor;
+import uk.co.sainsbury.api.JsoupApi;
+import uk.co.sainsbury.service.JsoupHtmlParser;
+import uk.co.sainsbury.service.Product;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;

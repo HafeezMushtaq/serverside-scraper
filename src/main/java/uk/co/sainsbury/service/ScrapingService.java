@@ -1,5 +1,7 @@
-package uk.co.sainsbury;
+package uk.co.sainsbury.service;
 
+
+import uk.co.sainsbury.service.HtmlParser;
 
 public class ScrapingService {
 

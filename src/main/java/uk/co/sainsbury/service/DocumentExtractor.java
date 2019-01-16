@@ -1,7 +1,6 @@
-package uk.co.sainsbury;
+package uk.co.sainsbury.service;
 
 
-import com.sun.webkit.WebPage;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

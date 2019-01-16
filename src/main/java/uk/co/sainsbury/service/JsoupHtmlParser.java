@@ -1,8 +1,9 @@
-package uk.co.sainsbury;
+package uk.co.sainsbury.service;
 
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import uk.co.sainsbury.api.JsoupApi;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
