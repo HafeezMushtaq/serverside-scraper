@@ -1,7 +1,6 @@
 package uk.co.sainsbury.service;
 
-
-import uk.co.sainsbury.service.HtmlParser;
+import java.util.List;
 
 public class ScrapingService {
 
@@ -11,7 +10,7 @@ public class ScrapingService {
         this.parser = parser;
     }
 
-    public String scrape(String url) {
-        return String.valueOf(parser.parse(url));
+    public List<Product> scrape(String url) {
+        return parser.parse(url);
     }
 }

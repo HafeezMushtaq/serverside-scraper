@@ -1,6 +1,9 @@
 package uk.co.sainsbury.usecase;
 
+import uk.co.sainsbury.service.Product;
 import uk.co.sainsbury.service.ScrapingService;
+
+import java.util.List;
 
 public class ScraperUseCase {
 
@@ -10,7 +13,8 @@ public class ScraperUseCase {
         this.scrapingService = scrapingService;
     }
 
-    public String scrape(String url) {
-        return scrapingService.scrape(url);
+    public ProductInformation scrape(String url) {
+        List<Product> products = scrapingService.scrape(url);
+        return new ProductInformation(null, null);
     }
 }
