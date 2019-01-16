@@ -8,10 +8,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import uk.co.sainsbury.service.DocumentExtractor;
+import uk.co.sainsbury.utility.DocumentExtractor;
 import uk.co.sainsbury.api.JsoupApi;
-import uk.co.sainsbury.service.JsoupHtmlParser;
-import uk.co.sainsbury.service.Product;
+import uk.co.sainsbury.utility.JsoupHtmlParser;
+import uk.co.sainsbury.utility.Product;
 
 import java.math.BigDecimal;
 import java.util.List;

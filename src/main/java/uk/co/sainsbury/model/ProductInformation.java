@@ -1,8 +1,10 @@
-package uk.co.sainsbury.usecase;
+package uk.co.sainsbury.model;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import uk.co.sainsbury.model.DisplayProduct;
+import uk.co.sainsbury.usecase.Total;
 
 import java.util.List;
 

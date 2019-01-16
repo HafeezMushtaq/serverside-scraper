@@ -1,4 +1,4 @@
-package uk.co.sainsbury.usecase;
+package uk.co.sainsbury.utility;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -6,14 +6,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;
 
-public class DisplayProduct {
+public class Product {
 
     private final String title;
     private final Integer energy;
     private final BigDecimal price;
     private final String description;
 
-    public DisplayProduct(String title, Integer energy, BigDecimal price, String description) {
+    public Product(String title, Integer energy, BigDecimal price, String description) {
         this.title = title;
         this.energy = energy;
         this.price = price;

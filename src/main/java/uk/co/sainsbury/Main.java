@@ -3,6 +3,9 @@ package uk.co.sainsbury;
 
 import uk.co.sainsbury.api.JsoupApi;
 import uk.co.sainsbury.service.*;
+import uk.co.sainsbury.utility.DocumentExtractor;
+import uk.co.sainsbury.utility.HtmlParser;
+import uk.co.sainsbury.utility.JsoupHtmlParser;
 import uk.co.sainsbury.usecase.ScraperUseCase;
 
 public class Main {
@@ -14,7 +17,8 @@ public class Main {
         JsoupApi jsoupApi = new JsoupApi();
         DocumentExtractor documentExtractor = new DocumentExtractor();
         HtmlParser parser = new JsoupHtmlParser(jsoupApi, documentExtractor);
-        ScrapingService scrapingService = new ScrapingService(parser);
+        ProductInformationConverter converter = new ProductInformationConverter();
+        ScrapingService scrapingService = new ScrapingService(parser, converter);
         ScraperUseCase useCase = new ScraperUseCase(scrapingService);
         System.out.println(useCase.scrape(URL));
     }
