@@ -8,6 +8,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 public class DocumentExtractor {
 
@@ -42,8 +43,11 @@ public class DocumentExtractor {
     public Integer getEnergy(Elements productInfo) {
         Element energyElement = productInfo.get(1).selectFirst(".nutritionTable");
 
-        String energy = energyElement.select("tbody tr").get(1).selectFirst("td").text();
-        return Integer.parseInt(energy.replace("kcal", ""));
+        if(Optional.ofNullable(energyElement).isPresent()) {
+            String energy = energyElement.select("tbody tr").get(1).selectFirst("td").text();
+            return Integer.parseInt(energy.replace("kcal", ""));
+        }
+        return null;
     }
 
 }

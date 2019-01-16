@@ -9,9 +9,7 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class DocumentExtractorTest {
 
@@ -112,5 +110,17 @@ public class DocumentExtractorTest {
         verify(productInfoRows).selectFirst(".nutritionTable");
         verify(nutritionTable).select("tbody tr");
         verify(energyRow).selectFirst("td");
+    }
+
+    @Test
+    public void getEnergy_shouldReturnNullIfEnergyElementIsNotPresent() {
+        Elements productInfo = mock(Elements.class);
+        Element productInfoRows = mock(Element.class);
+
+        when(productInfo.get(1)).thenReturn(productInfoRows);
+        when(productInfoRows.selectFirst(anyString())).thenReturn(null);
+
+        assertThat(extractor.getEnergy(productInfo)).isNull();
+        verify(productInfoRows).selectFirst(".nutritionTable");
     }
 }
