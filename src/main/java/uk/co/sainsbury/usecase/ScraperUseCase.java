@@ -1,5 +1,7 @@
 package uk.co.sainsbury.usecase;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import uk.co.sainsbury.model.ProductInformation;
 import uk.co.sainsbury.service.ScrapingService;
 
@@ -12,7 +14,9 @@ public class ScraperUseCase {
         this.scrapingService = scrapingService;
     }
 
-    public ProductInformation scrape(String url) {
-        return scrapingService.scrape(url);
+    public JsonElement scrape(String url) {
+        ProductInformation productInformation = scrapingService.scrape(url);
+        Gson gson = new Gson();
+        return gson.toJsonTree(productInformation);
     }
 }

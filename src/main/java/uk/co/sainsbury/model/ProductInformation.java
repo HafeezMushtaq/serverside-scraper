@@ -1,5 +1,6 @@
 package uk.co.sainsbury.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -10,7 +11,9 @@ import java.util.List;
 
 public class ProductInformation {
 
+    @JsonProperty("results")
     private final List<DisplayProduct> products;
+
     private final Total total;
 
     public ProductInformation(List<DisplayProduct> products, Total total) {

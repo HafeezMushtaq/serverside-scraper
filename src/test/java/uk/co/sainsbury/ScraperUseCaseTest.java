@@ -1,5 +1,8 @@
 package uk.co.sainsbury;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -24,13 +27,13 @@ public class ScraperUseCaseTest {
     private ScraperUseCase useCase;
 
     @Test
-    public void scrape_shouldReturnProductInformation() {
+    public void scrape_shouldReturnProductInformationAsJsonTree() {
         ProductInformation productInformation = new ProductInformation(null, null);
         when(scrapingService.scrape(anyString())).thenReturn(productInformation);
 
-        ProductInformation result = useCase.scrape("url");
+        JsonElement result = useCase.scrape("url");
 
-        assertThat(result).isEqualTo(productInformation);
+        assertThat(result).isEqualTo(new Gson().toJsonTree(productInformation));
         verify(scrapingService).scrape("url");
     }
 }
