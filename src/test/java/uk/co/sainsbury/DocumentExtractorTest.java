@@ -47,6 +47,17 @@ public class DocumentExtractorTest {
     }
 
     @Test
+    public void getPrice_ShouldRemoveStripOutTheExtraTextFromThePriceText() {
+        Element element = mock(Element.class);
+        Element price = mock(Element.class);
+        when(element.selectFirst(anyString())).thenReturn(price);
+        when(price.text()).thenReturn("£12.45/unit");
+
+        assertThat(extractor.getPrice(element)).isEqualTo(new BigDecimal("12.45"));
+        verify(element).selectFirst(".pricing .pricePerUnit");
+    }
+
+    @Test
     public void getDescription_ShouldUseSelectFirstWithCssQueryToExtractDescriptionFromOfProductInfo() {
         Elements productInfo = mock(Elements.class);
         Element description = mock(Element.class);

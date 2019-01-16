@@ -1,6 +1,7 @@
 package uk.co.sainsbury;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,7 +20,9 @@ public class DocumentExtractor {
 
     public BigDecimal getPrice(Element element) {
         String price = element.selectFirst(".pricing .pricePerUnit").text();
-        return new BigDecimal(price);
+        String cleanedPrice = StringUtils.replaceEach(price, new String[]{"£", "/unit"}, new String[]{"", ""});
+
+        return new BigDecimal(cleanedPrice);
     }
 
     public Elements getProductInformation(Element element) {
