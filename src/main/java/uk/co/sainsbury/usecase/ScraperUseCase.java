@@ -1,9 +1,6 @@
 package uk.co.sainsbury.usecase;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 import uk.co.sainsbury.api.JsoupException;
 import uk.co.sainsbury.model.ProductInformation;
 import uk.co.sainsbury.service.ScrapingService;

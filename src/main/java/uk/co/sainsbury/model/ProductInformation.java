@@ -1,19 +1,19 @@
 package uk.co.sainsbury.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import uk.co.sainsbury.model.DisplayProduct;
 import uk.co.sainsbury.usecase.Total;
 
 import java.util.List;
 
 public class ProductInformation {
 
-    @JsonProperty("results")
+    @SerializedName("results")
     private final List<DisplayProduct> products;
 
+    @SerializedName("total")
     private final Total total;
 
     public ProductInformation(List<DisplayProduct> products, Total total) {

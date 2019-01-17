@@ -40,13 +40,10 @@ public class DocumentExtractor {
     }
 
     public Integer getEnergy(Elements productInfo) {
-        Element energyElement = productInfo.get(1).selectFirst(".nutritionTable");
-
-        if(Optional.ofNullable(energyElement).isPresent()) {
-            String energy = energyElement.select("tbody tr").get(1).selectFirst("td").text();
-            return Integer.parseInt(energy.replace("kcal", ""));
-        }
-        return null;
+        return Optional.ofNullable(productInfo.get(1).selectFirst(".nutritionTable"))
+                .map(energyElement -> {
+                    String energy = energyElement.select("tbody tr").get(1).selectFirst("td").text();
+                    return Integer.parseInt(energy.replace("kcal", ""));
+                }).orElse(null);
     }
-
 }
