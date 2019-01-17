@@ -1,4 +1,4 @@
-package uk.co.sainsbury.service;
+package uk.co.sainsbury.converter;
 
 import uk.co.sainsbury.model.DisplayProduct;
 import uk.co.sainsbury.model.ProductInformation;
@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductInformationConverter {
+public class ProductInformationConverter implements Converter<List<Product>, ProductInformation> {
 
     public ProductInformation convert(List<Product> products) {
         List<DisplayProduct> displayProducts = products.stream()

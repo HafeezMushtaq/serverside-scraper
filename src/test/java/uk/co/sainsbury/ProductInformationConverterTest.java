@@ -1,6 +1,7 @@
-package uk.co.sainsbury.service;
+package uk.co.sainsbury;
 
 import org.junit.Test;
+import uk.co.sainsbury.converter.ProductInformationConverter;
 import uk.co.sainsbury.model.DisplayProduct;
 import uk.co.sainsbury.model.ProductInformation;
 import uk.co.sainsbury.utility.Product;

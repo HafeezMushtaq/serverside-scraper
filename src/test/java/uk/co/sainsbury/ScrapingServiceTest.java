@@ -5,9 +5,9 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import uk.co.sainsbury.converter.Converter;
 import uk.co.sainsbury.utility.HtmlParser;
 import uk.co.sainsbury.utility.Product;
-import uk.co.sainsbury.service.ProductInformationConverter;
 import uk.co.sainsbury.service.ScrapingService;
 import uk.co.sainsbury.model.DisplayProduct;
 import uk.co.sainsbury.model.ProductInformation;
@@ -15,6 +15,7 @@ import uk.co.sainsbury.usecase.Total;
 
 import java.math.BigDecimal;
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.anyListOf;
@@ -29,7 +30,7 @@ public class ScrapingServiceTest {
     private HtmlParser parser;
 
     @Mock
-    private ProductInformationConverter converter;
+    private Converter<List<Product>, ProductInformation> converter;
 
     @InjectMocks
     private ScrapingService service;
