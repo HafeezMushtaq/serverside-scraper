@@ -16,12 +16,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        JsoupApi jsoupApi = new JsoupApi();
-        DocumentExtractor documentExtractor = new DocumentExtractor();
-        HtmlParser parser = new JsoupHtmlParser(jsoupApi, documentExtractor);
-        Converter converter = new ProductInformationConverter();
-        ScrapingService scrapingService = new ScrapingService(parser, converter);
-        ScraperUseCase useCase = new ScraperUseCase(scrapingService);
+        final JsoupApi jsoupApi = new JsoupApi();
+        final DocumentExtractor documentExtractor = new DocumentExtractor();
+        final HtmlParser parser = new JsoupHtmlParser(jsoupApi, documentExtractor);
+        final Converter converter = new ProductInformationConverter();
+        final ScrapingService scrapingService = new ScrapingService(parser, converter);
+        final ScraperUseCase useCase = new ScraperUseCase(scrapingService);
         System.out.println(useCase.scrape(URL));
     }
 }

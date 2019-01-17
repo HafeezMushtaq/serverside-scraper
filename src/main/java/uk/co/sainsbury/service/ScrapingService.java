@@ -13,7 +13,7 @@ public class ScrapingService {
     private final HtmlParser parser;
     private final Converter<List<Product>, ProductInformation> converter;
 
-    public ScrapingService(final HtmlParser parser, final Converter converter) {
+    public ScrapingService(final HtmlParser parser, final Converter<List<Product>, ProductInformation> converter) {
         this.parser = parser;
         this.converter = converter;
     }

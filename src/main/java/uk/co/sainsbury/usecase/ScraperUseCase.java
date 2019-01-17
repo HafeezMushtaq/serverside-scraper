@@ -10,15 +10,14 @@ public class ScraperUseCase {
 
     private final ScrapingService scrapingService;
 
-    public ScraperUseCase(ScrapingService scrapingService) {
+    public ScraperUseCase(final ScrapingService scrapingService) {
         this.scrapingService = scrapingService;
     }
 
-    public JsonElement scrape(String url)  {
+    public JsonElement scrape(final String url)  {
         try {
-            ProductInformation productInformation = scrapingService.scrape(url);
-            Gson gson = new Gson();
-            return gson.toJsonTree(productInformation);
+            final ProductInformation productInformation = scrapingService.scrape(url);
+            return new Gson().toJsonTree(productInformation);
         } catch (JsoupException e) {
             JsonObject jsonObject = new JsonObject();
             jsonObject.add("error", new JsonPrimitive(String.format("Please check URL - Could not connect to [%s]", url)));

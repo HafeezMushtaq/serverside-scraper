@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class ProductInformationConverterTest {
 
-    private ProductInformationConverter converter = new ProductInformationConverter();
+    private final ProductInformationConverter converter = new ProductInformationConverter();
 
     @Test
     public void convert_shouldConvertTheProductIntoDisplayProductOnProductInfo() {

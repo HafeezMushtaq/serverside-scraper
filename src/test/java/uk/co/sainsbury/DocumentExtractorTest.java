@@ -9,12 +9,11 @@ import uk.co.sainsbury.utility.DocumentExtractor;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 public class DocumentExtractorTest {
 
-    private DocumentExtractor extractor = new DocumentExtractor();
+    private final DocumentExtractor extractor = new DocumentExtractor();
 
     @Test
     public void getProductElements_ShouldUseSelectWithCssQueryToExtractProductElements() {
