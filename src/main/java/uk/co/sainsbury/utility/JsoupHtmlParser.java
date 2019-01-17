@@ -4,6 +4,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import uk.co.sainsbury.api.JsoupApi;
+import uk.co.sainsbury.api.JsoupException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class JsoupHtmlParser implements HtmlParser {
     }
 
     @Override
-    public List<Product> parse(String url) {
+    public List<Product> parse(final String url) throws JsoupException {
         Document document = jsoupApi.getWebPageAsDocument(url);
         Elements productElements = documentExtractor.getProductElements(document);
         List<Product> products = new ArrayList<>();

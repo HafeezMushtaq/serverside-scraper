@@ -7,12 +7,11 @@ import java.io.IOException;
 
 public class JsoupApi {
 
-    public Document getWebPageAsDocument(String url) {
+    public Document getWebPageAsDocument(final String url) throws JsoupException {
         try {
             return Jsoup.connect(url).get();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new JsoupException("Unable to connect to the supplied URL");
         }
-        return null;
     }
 }

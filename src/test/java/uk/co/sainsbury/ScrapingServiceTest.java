@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import uk.co.sainsbury.api.JsoupException;
 import uk.co.sainsbury.converter.Converter;
 import uk.co.sainsbury.utility.HtmlParser;
 import uk.co.sainsbury.utility.Product;
@@ -36,7 +37,7 @@ public class ScrapingServiceTest {
     private ScrapingService service;
 
     @Test
-    public void scrape_shouldUseParserToParseUrlReturningProductInformation() {
+    public void scrape_shouldUseParserToParseUrlReturningProductInformation() throws JsoupException {
         Product product = new Product("Kiwi", 325, BigDecimal.TEN, "Healthy Stuff");
         Total total = new Total(BigDecimal.TEN, BigDecimal.ONE);
         DisplayProduct displayProduct = new DisplayProduct("Kiwi", 325, BigDecimal.TEN, "Healthy Stuff");

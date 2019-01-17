@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import uk.co.sainsbury.api.JsoupException;
 import uk.co.sainsbury.utility.DocumentExtractor;
 import uk.co.sainsbury.api.JsoupApi;
 import uk.co.sainsbury.utility.JsoupHtmlParser;
@@ -38,7 +39,7 @@ public class JsoupHtmlParserTest {
     private JsoupHtmlParser parser;
 
     @Test
-    public void parse_shouldUseDocumentExtractorToExtractTheProductElements() {
+    public void parse_shouldUseDocumentExtractorToExtractTheProductElements() throws JsoupException {
         Document document = new Document(URL);
         when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         Element element = new Element("element");
@@ -53,7 +54,7 @@ public class JsoupHtmlParserTest {
     }
 
     @Test
-    public void parse_shouldUseDocumentExtractorToExtractTheTitleOfProduct() {
+    public void parse_shouldUseDocumentExtractorToExtractTheTitleOfProduct() throws JsoupException {
         Document document = new Document(URL);
         when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         Element element = new Element("element");
@@ -68,7 +69,7 @@ public class JsoupHtmlParserTest {
     }
 
     @Test
-    public void parse_shouldUseDocumentExtractorToExtractTheEnergyValueOfProduct() {
+    public void parse_shouldUseDocumentExtractorToExtractTheEnergyValueOfProduct() throws JsoupException {
         Document document = new Document(URL);
         Element element = new Element("element");
         Elements elements = new Elements(element);
@@ -86,7 +87,7 @@ public class JsoupHtmlParserTest {
     }
 
     @Test
-    public void parse_shouldUseDocumentExtractorToExtractTheDescriptionOfProduct() {
+    public void parse_shouldUseDocumentExtractorToExtractTheDescriptionOfProduct() throws JsoupException {
         Document document = new Document(URL);
         Element element = new Element("element");
         Elements elements = new Elements(element);
@@ -104,7 +105,7 @@ public class JsoupHtmlParserTest {
     }
 
     @Test
-    public void parse_shouldUseDocumentExtractorToExtractThePriceOfProduct() {
+    public void parse_shouldUseDocumentExtractorToExtractThePriceOfProduct() throws JsoupException {
         Document document = new Document(URL);
         when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         Element element = new Element("element");
@@ -120,7 +121,7 @@ public class JsoupHtmlParserTest {
     }
 
     @Test
-    public void parse_ReturnListOfProductsWhenWeHaveMoreThanProductElement() {
+    public void parse_ReturnListOfProductsWhenWeHaveMoreThanProductElement() throws JsoupException {
         Document document = new Document(URL);
         when(jsoupApi.getWebPageAsDocument(anyString())).thenReturn(document);
         Element element = new Element("element");

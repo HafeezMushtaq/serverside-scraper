@@ -1,5 +1,6 @@
 package uk.co.sainsbury.service;
 
+import uk.co.sainsbury.api.JsoupException;
 import uk.co.sainsbury.converter.Converter;
 import uk.co.sainsbury.model.ProductInformation;
 import uk.co.sainsbury.utility.HtmlParser;
@@ -17,7 +18,7 @@ public class ScrapingService {
         this.converter = converter;
     }
 
-    public ProductInformation scrape(final String url) {
+    public ProductInformation scrape(final String url) throws JsoupException {
         final List<Product> products = parser.parse(url);
         return converter.convert(products);
     }
